@@ -12,7 +12,6 @@ import {
   CarouselNext,
   CarouselPrevious,
 } from "@/components/ui/carousel"
-import image from "../assets/growth.png"
 
 interface FeatureProps {
   description: string
@@ -38,7 +37,7 @@ const features: FeatureProps[] = [
   {
     description:
       "Lorem ipsum dolor sit amet consectetur adipisicing elit. Nisi nesciunt est nostrum omnis ab sapiente.",
-    image: image,
+    image: "https://s3-alpha-sig.figma.com/img/1063/8c16/66e94511001413355468fc721c26e5c7?Expires=1734912000&Key-Pair-Id=APKAQ4GOSFWCVNEHN3O4&Signature=cPrKjHKbu~Ikj54W8g365q4kXUfuAwmg1ATa2972Lxrzo-6DQdfOaus3v3K1QHmZUhutOOfwqUF9U77f6ogpGT8I0Rd0cpd9SXo4zhyUch~8o5pN3wdAICnwTbhkgcxKdEr~l5AONbeHNWWGx0m8flTMgjKybcn72aoGnZxYuwfLHebqeCl5W~ch~H-E3A40f3MMyk5SOHk~Lq48qUTt7k5dfxqSh6T2ZiJ~IF7vtoZzYduTsfKnzp~OrGFgWY9hrcfy~cZjLxcPSVMljjvKOCaK-Sb7R3xOaszcygGeaZib-76HA-NCzu2aBh~gSlMO0AE7DXKSywGBQjkEd2lkuw__",
   },
 ]
 
