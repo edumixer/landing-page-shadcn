@@ -1,26 +1,24 @@
-'use client'
+import { zodResolver } from "@hookform/resolvers/zod";
+import { Mail } from "lucide-react";
+import { useState } from "react";
+import { useForm } from "react-hook-form";
 
-import { useState } from "react"
-import { useForm } from "react-hook-form"
-import { zodResolver } from "@hookform/resolvers/zod"
-import { Mail } from 'lucide-react'
-
-import { Button } from "@/components/ui/button"
+import { Button } from "@/components/ui/button";
 import {
   Form,
   FormControl,
   FormField,
   FormItem,
   FormMessage,
-} from "@/components/ui/form"
-import { Input } from "@/components/ui/input"
-import { Textarea } from "@/components/ui/textarea"
-import { cn } from "@/lib/utils"
-import { contactFormSchema, ContactFormValues } from "@/lib/schema"
-import { submitContactForm } from "@/lib/actions"
+} from "@/components/ui/form";
+import { Input } from "@/components/ui/input";
+import { Textarea } from "@/components/ui/textarea";
+import { submitContactForm } from "@/lib/actions";
+import { contactFormSchema, ContactFormValues } from "@/lib/schema";
+import { cn } from "@/lib/utils";
 
 export function ContactForm() {
-  const [isPending, setIsPending] = useState(false)
+  const [isPending, setIsPending] = useState(false);
 
   const form = useForm<ContactFormValues>({
     resolver: zodResolver(contactFormSchema),
@@ -30,29 +28,32 @@ export function ContactForm() {
       telephone: "",
       message: "",
     },
-  })
+  });
 
   async function onSubmit(values: ContactFormValues) {
-    setIsPending(true)
+    setIsPending(true);
     try {
-      const result = await submitContactForm(values)
+      const result = await submitContactForm(values);
 
       if (result.error) {
-        console.error(result.error)
-        return
+        console.error(result.error);
+        return;
       }
 
-      alert('Succceded')
-      form.reset()
+      alert("Succceded");
+      form.reset();
     } catch (error) {
-      console.error(error, 'Something went wrong. Please try again.')
+      console.error(error, "Something went wrong. Please try again.");
     } finally {
-      setIsPending(false)
+      setIsPending(false);
     }
   }
 
   return (
-    <div className="w-full max-w-md mx-auto p-6 space-y-8 border border-gray-200 rounded-lg shadow-md">
+    <section
+      id="contact"
+      className="w-full max-w-md mx-auto p-6 space-y-8 border rounded-lg shadow-md mb-5"
+    >
       {/* Profile Photo Section */}
       <div className="flex justify-center mb-6">
         <div className="relative w-32 h-32">
@@ -166,6 +167,6 @@ export function ContactForm() {
           </Button>
         </form>
       </Form>
-    </div>
-  )
+    </section>
+  );
 }
