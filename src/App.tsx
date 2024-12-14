@@ -1,13 +1,17 @@
+import "./App.css";
+import { ContactForm } from "./components/Contact";
 import { Features } from "./components/Features";
 import { Footer } from "./components/Footer";
 import { Navbar } from "./components/Navbar";
-import { ContactForm } from "./components/Contact";
-import "./App.css";
+import { TaskOrganizer } from "./components/Organize";
+import { ToDoList } from "./components/ToDoList";
 
 function App() {
   return (
     <>
       <Navbar />
+      <TaskOrganizer />
+      <ToDoList />
       <Features />
       <ContactForm />
       <Footer />
