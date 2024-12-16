@@ -62,10 +62,10 @@ export const Features = () => {
           <CarouselContent className="-ml-2 md:-ml-4">
             {features.map(({ description, image }, index) => (
               <CarouselItem
-                key={description}
+                key={index}
                 className="pl-2 md:pl-4 md:basis-1/2 lg:basis-1/3"
               >
-                <Card className="h-full" tabIndex={index}>
+                <Card className="h-full">
                   <div className="absolute right-0 w-8 h-16" />
 
                   <img
