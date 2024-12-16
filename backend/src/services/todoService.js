@@ -1,3 +1,4 @@
+import bcrypt from "bcrypt";
 import prisma from "../db/index.js";
 
 export async function getAllTodos() {
@@ -61,4 +62,43 @@ export async function eraseCompleted() {
       completed: true,
     },
   });
+}
+
+// ---- USER ----
+
+export async function registerUser(username, password) {
+  const existingUser = await prisma.user.findUnique({
+    where: { username },
+  });
+
+  if (existingUser) {
+    throw new Error("Nome de usuário já existe.");
+  }
+
+  const hashedPassword = await bcrypt.hash(password, 10);
+
+  return await prisma.user.create({
+    data: {
+      username,
+      password: hashedPassword,
+    },
+  });
+}
+
+export async function loginUser(username, password) {
+  const user = await prisma.user.findUnique({
+    where: { username },
+  });
+
+  if (!user) {
+    throw new Error("Usuário não encontrado.");
+  }
+
+  const isPasswordValid = await bcrypt.compare(password, user.password);
+
+  if (!isPasswordValid) {
+    throw new Error("Senha incorreta.");
+  }
+
+  return user;
 }

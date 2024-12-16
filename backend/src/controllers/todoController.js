@@ -5,6 +5,8 @@ import {
   deleteTodo,
   eraseCompleted,
   getAllTodos,
+  loginUser,
+  registerUser,
   updateTodo,
 } from "../services/todoService.js";
 
@@ -85,12 +87,10 @@ export async function handleUpdateTodo(req, res) {
     }
 
     const updatedTodo = await updateTodo(id, desc);
-    res
-      .status(200)
-      .json({
-        message: "Nome da tarefa foi alterada com sucesso",
-        updatedTodo,
-      });
+    res.status(200).json({
+      message: "Nome da tarefa foi alterada com sucesso",
+      updatedTodo,
+    });
   } catch (err) {
     console.error("Erro ao atualizar o nome da tarefa:", err.message);
     res.status(500).json({
@@ -133,5 +133,45 @@ export async function handleEraseAllCompleted(req, res) {
       error: "Erro ao deletar tarefas concluídas",
       message: err.message,
     });
+  }
+}
+
+export async function handleRegisterUser(req, res) {
+  try {
+    const { username, password } = req.body;
+
+    if (!username || !password) {
+      return res
+        .status(400)
+        .json({ error: "Usuário ou senha é indispensável" });
+    }
+
+    const user = await registerUser(username, password);
+    res.status(201).json({ message: "Usuário registrado com sucesso", user });
+  } catch (err) {
+    console.error("Erro ao registrar usuário:", err.message);
+    res
+      .status(500)
+      .json({ error: "Erro ao registrar usuário", message: err.message });
+  }
+}
+
+export async function handleLoginUser(req, res) {
+  try {
+    const { username, password } = req.body;
+
+    if (!username || !password) {
+      return res
+        .status(400)
+        .json({ error: "Usuário ou senha é indispensável" });
+    }
+
+    const user = await loginUser(username, password);
+    res.status(200).json({ message: "Usuário logado com sucesso", user });
+  } catch (err) {
+    console.error("Erro ao fazer login:", err.message);
+    res
+      .status(500)
+      .json({ error: "Erro ao fazer login", message: err.message });
   }
 }

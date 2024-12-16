@@ -6,12 +6,16 @@ import {
   handleDeleteTodo,
   handleEraseAllCompleted,
   handleGetTodos,
+  handleLoginUser,
+  handleRegisterUser,
   handleUpdateTodo,
 } from "../controllers/todoController.js";
 
 const router = express.Router();
 
 router.post("/createTodo", handleCreateTodo);
+router.post("/login", handleLoginUser);
+router.post("/register", handleRegisterUser);
 
 router.patch("/completed", handleCompletedTodo);
 router.patch("/updateTodo", handleUpdateTodo);
