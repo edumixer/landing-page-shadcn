@@ -7,11 +7,11 @@ export function CardRotate() {
       <div className="relative bg-gray-900 dark:bg-gray-800 py-8 rotate-6 transform w-[300px] h-[120px] flex flex-col items-center justify-center">
         {/* Texto reto dentro do card rotacionado */}
         <div className="absolute -top-10 bg-gray-900 dark:bg-gray-800 py-5 px-4 rotate-6 transform">
-          <h2 className="text-2xl font-bold text-center -rotate-6 border-b-2 border-green-500">
+          <h2 className="text-2xl font-bold text-center -rotate-6 border-b-2 border-green-500 text-white">
             To-do List
           </h2>
         </div>
-        <p className="text-center text-md">
+        <p className="text-center text-md text-white">
           Select and click to set your main priorities, check when done and
           create what's new.
         </p>
