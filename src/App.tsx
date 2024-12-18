@@ -1,4 +1,5 @@
 import "./App.css";
+import { CardRotate } from "./components/CardRotate";
 import { ContactForm } from "./components/Contact";
 import { Features } from "./components/Features";
 import { Footer } from "./components/Footer";
@@ -11,6 +12,10 @@ function App() {
     <>
       <Navbar />
       <TaskOrganizer />
+
+      {/* Card Rotacionado */}
+      <CardRotate />
+
       <ToDoList />
       <Features />
       <ContactForm />
