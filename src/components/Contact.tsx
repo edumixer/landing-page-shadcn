@@ -10,11 +10,10 @@ import {
   FormItem,
   FormMessage,
 } from "@/components/ui/form";
-import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { submitContactForm } from "@/lib/actions";
 import { contactFormSchema, ContactFormValues } from "@/lib/schema";
-import { cn } from "@/lib/utils";
+import { FormFieldInput } from "./composition/FormInput";
 
 export function ContactForm() {
   const [isPending, setIsPending] = useState(false);
@@ -95,74 +94,29 @@ export function ContactForm() {
           onSubmit={form.handleSubmit(onSubmit)}
           noValidate
         >
-          <FormField
-            control={form.control}
+          <FormFieldInput
             name="name"
-            render={({ field }) => (
-              <FormItem>
-                <label htmlFor="name" className="text-sm font-medium">
-                  Your name
-                </label>
-                <FormControl>
-                  <Input
-                    id="name"
-                    placeholder="Type your name here..."
-                    {...field}
-                    disabled={isPending}
-                    className={cn(
-                      "h-12",
-                      form.formState.errors.name && "border-red-500"
-                    )}
-                  />
-                </FormControl>
-                <FormMessage />
-              </FormItem>
-            )}
+            label="Your name"
+            placeholder="type your name here..."
           />
           <div className="flex gap-4">
-            <FormField
-              control={form.control}
-              name="email"
-              render={({ field }) => (
-                <FormItem className="w-1/2">
-                  <label htmlFor="email" className="text-sm font-medium">
-                    Email*
-                  </label>
-                  <FormControl>
-                    <Input
-                      required
-                      id="email"
-                      placeholder="example@example.com"
-                      {...field}
-                      disabled={isPending}
-                    />
-                  </FormControl>
-                  <FormMessage />
-                </FormItem>
-              )}
-            />
-            <FormField
-              control={form.control}
-              name="telephone"
-              render={({ field }) => (
-                <FormItem className="w-1/2">
-                  <label htmlFor="telephone" className="text-sm font-medium">
-                    Telephone*
-                  </label>
-                  <FormControl>
-                    <Input
-                      required
-                      id="telephone"
-                      placeholder="(  ) ____-____"
-                      {...field}
-                      disabled={isPending}
-                    />
-                  </FormControl>
-                  <FormMessage />
-                </FormItem>
-              )}
-            />
+            <div className="flex-1">
+              <FormFieldInput
+                name="email"
+                label="Email"
+                placeholder="example@example.com"
+                type="email"
+              />
+            </div>
+            <div className="flex-1">
+              <FormFieldInput
+                name="telephone"
+                label="Telephone"
+                placeholder="(  ) ____-____"
+              />
+            </div>
           </div>
+
           <FormField
             control={form.control}
             name="message"
