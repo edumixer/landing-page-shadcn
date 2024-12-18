@@ -8,7 +8,6 @@ import {
   updateTodo,
 } from "@/services/todoService";
 import { useEffect, useMemo, useState } from "react";
-import { CardRotate } from "./CardRotate";
 import { TodoCard } from "./composition/CardToDo";
 
 interface Todo {
@@ -106,33 +105,28 @@ export const ToDoList = () => {
   };
 
   return (
-    <>
-      {/* Card Rotacionado */}
-      <CardRotate />
-
-      <section className="flex gap-6 p-4 max-w-4xl mx-auto">
-        <TodoCard
-          title="To-do"
-          description="Take a breath. Start doing."
-          headerColor="bg-orange-400"
-          tasks={incompleteTodos}
-          onTaskToggle={handleToggleTodo}
-          onDeleteTask={handleDeleteTodo}
-          onAddTask={handleAddTodo}
-          onErase={handleEraseAll}
-          isEditable
-          onUpdateTask={handleUpdateTodo}
-        />
-        <TodoCard
-          title="Done"
-          description={`Congratulations! You have done ${completedTodos.length} tasks.`}
-          headerColor="bg-green-400"
-          tasks={completedTodos}
-          onTaskToggle={handleToggleTodo}
-          onDeleteTask={handleDeleteTodo}
-          onErase={handleEraseCompleted}
-        />
-      </section>
-    </>
+    <section className="flex gap-6 p-4 max-w-4xl mx-auto">
+      <TodoCard
+        title="To-do"
+        description="Take a breath. Start doing."
+        headerColor="bg-orange-400"
+        tasks={incompleteTodos}
+        onTaskToggle={handleToggleTodo}
+        onDeleteTask={handleDeleteTodo}
+        onAddTask={handleAddTodo}
+        onErase={handleEraseAll}
+        isEditable
+        onUpdateTask={handleUpdateTodo}
+      />
+      <TodoCard
+        title="Done"
+        description={`Congratulations! You have done ${completedTodos.length} tasks.`}
+        headerColor="bg-green-400"
+        tasks={completedTodos}
+        onTaskToggle={handleToggleTodo}
+        onDeleteTask={handleDeleteTodo}
+        onErase={handleEraseCompleted}
+      />
+    </section>
   );
 };
