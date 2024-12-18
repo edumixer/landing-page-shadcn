@@ -26,22 +26,9 @@ import { useState } from "react";
 import { ModeToggle } from "./mode-toggle";
 import { buttonVariants } from "./ui/button";
 
-interface RouteProps {
-  href: string;
-  label: string;
-}
-
-const routeList: RouteProps[] = [
-  { href: "#home", label: "Home" },
-  { href: "#toDoList", label: "To Do List" },
-  { href: "#features", label: "Features" },
-  { href: "#contact", label: "Contact" },
-];
-
 export const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false);
   const [isModalOpen, setIsModalOpen] = useState(false);
-  const [username, setUsername] = useState<string | null>(null);
 
   const handleSubmit = async (endpoint: string, data: any) => {
     try {
@@ -49,9 +36,6 @@ export const Navbar = () => {
         headers: { "Content-Type": "application/json" },
       });
       if (response.data) {
-        if (endpoint === "login" && response.data.user.username) {
-          setUsername(response.data.user.username);
-        }
         alert(
           `${endpoint} successful: ${JSON.stringify(response.data.message)}`
         );
@@ -69,20 +53,20 @@ export const Navbar = () => {
   };
 
   return (
-    <header className="sticky border-b-[1px] top-0 z-40 w-full bg-white dark:border-b-slate-700 dark:bg-background">
+    <header className="sticky top-5 z-40 w-full bg-white dark:border-b-slate-700 dark:bg-background">
       <NavigationMenu className="mx-auto">
         <NavigationMenuList className="container h-14 px-4 w-screen flex justify-between">
           <NavigationMenuItem className="font-bold flex">
             <a
               rel="noreferrer noopener"
               href="/"
-              className="ml-2 font-bold text-xl flex items-center gap-x-4"
+              className="font-bold text-xl flex items-center gap-x-4"
             >
               <div>
                 <svg
-                  width="32"
-                  height="30"
-                  viewBox="0 0 32 50"
+                  width="60"
+                  height="70"
+                  viewBox="0 0 60 50"
                   fill="none"
                   xmlns="http://www.w3.org/2000/svg"
                 >
@@ -120,61 +104,31 @@ export const Navbar = () => {
                 <SheetHeader>
                   <SheetTitle className="font-bold text-xl">Coopers</SheetTitle>
                 </SheetHeader>
-                <nav className="flex flex-col justify-center items-center gap-2 mt-4">
-                  {routeList.map(({ href, label }) => (
-                    <a
-                      rel="noreferrer noopener"
-                      key={label}
-                      href={href}
-                      onClick={() => setIsOpen(false)}
-                      className={buttonVariants({ variant: "ghost" })}
-                    >
-                      {label}
-                    </a>
-                  ))}
-                </nav>
               </SheetContent>
             </Sheet>
           </span>
-
-          <nav className="hidden md:flex">
-            {routeList.map(({ href, label }) => (
-              <a
-                rel="noreferrer noopener"
-                href={href}
-                key={label}
-                className={`text-[17px] ${buttonVariants({
-                  variant: "ghost",
-                })}`}
-              >
-                {label}
-              </a>
-            ))}
-          </nav>
 
           <div className="hidden md:flex items-center gap-4">
             <Dialog open={isModalOpen} onOpenChange={setIsModalOpen}>
               <DialogTrigger asChild>
                 <button
-                  className={`text-[17px] ${buttonVariants({
-                    variant: "default",
-                  })}`}
+                  className={`text-[17px] bg-black text-white border border-gray-600 px-10 py-2 rounded-md hover:bg-gray-600 hover:border-gray-400 hover:text-white transition duration-300 ease-in-out`} //${buttonVariants({ variant: "ghost" })}`}
                 >
-                  {username ? `${username} | Login` : "Login"}
+                  entrar
                 </button>
               </DialogTrigger>
 
               <DialogContent>
                 <DialogHeader>
                   <DialogTitle className="text-xl font-bold">
-                    Login or Register
+                    Login ou se Registrar?
                   </DialogTitle>
                 </DialogHeader>
 
                 <Tabs defaultValue="login">
                   <TabsList className="flex justify-center mb-4">
                     <TabsTrigger value="login">Login</TabsTrigger>
-                    <TabsTrigger value="register">Register</TabsTrigger>
+                    <TabsTrigger value="register">Registrar</TabsTrigger>
                   </TabsList>
 
                   {/* Login Form */}
@@ -210,7 +164,7 @@ export const Navbar = () => {
                           variant: "default",
                         })}`}
                       >
-                        Login
+                        Entrar
                       </button>
                     </form>
                   </TabsContent>
@@ -256,7 +210,7 @@ export const Navbar = () => {
               </DialogContent>
             </Dialog>
 
-            <ModeToggle />
+            {/* <ModeToggle /> */}
           </div>
         </NavigationMenuList>
       </NavigationMenu>
